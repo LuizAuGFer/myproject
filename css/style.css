@@ -1,0 +1,53 @@
+
+html,
+body {
+    background-color: #2f3640;
+  height: 100%;
+}
+body{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #2f3640;
+}
+p{
+    color: rgb(153, 153, 153);
+}
+.container{
+    background-color: #2f3640;
+}
+.container{
+    background-color: #2f3640;   
+}
+.card{
+    border: solid 2px #011429;
+    border-radius: 3px;
+
+}
+.card-body{
+    background-color: #353b48;  
+}
+.card-header{
+    background-color: #23272f;
+    color: #007bff;
+    border-radius: 0;
+}
+.form-control{
+    background-color: #444a5c;
+    border: solid 1px rgb(20, 20, 20);
+}
+.form-control:enabled{
+    background-color: #424758;
+    color: white;
+}
+.verticalLine{
+    border-left: 2px solid #001f41;;
+  }
+  .headcard{
+      padding: 10px;
+      background-color: #2b2e36;
+      color: rgb(235, 232, 232);
+  }
