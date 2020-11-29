@@ -4,6 +4,7 @@ const mysql=require('mysql');
 const handlebars=require ('express-handlebars');
 const app=express();
 const urlencodeParser = bodyParser.urlencoded({extended:false});
+const sound = require('sound-play');
 
 //Mysql Connect
 const sql=mysql.createConnection({
@@ -31,7 +32,6 @@ app.use('/js', express.static('js'));
 app.get('/', function(req, res){
     sql.query("SELECT * FROM comment", function(err, results, fields){
         res.render('index', {data: results});
-        
     });
    
 });
@@ -40,7 +40,40 @@ app.post('/insert', urlencodeParser, function(req, res ){
     res.redirect('/');  
 });
 
-app.post('/speat', urlencodeParser, function(req, res){
-    
+app.post('/speat', urlencodeParser, function(req, results, res){
+  //Text to Speech
+  const fs = require('fs');
+  const TextToSpeechV1 = require('ibm-watson/text-to-speech/v1');
+  const { IamAuthenticator } = require('ibm-watson/auth');
+  
+  const textToSpeech = new TextToSpeechV1({
+    authenticator: new IamAuthenticator({ apikey: 'LahBBLtvB3kh6IlBz6mWkgoU4QAvv80-OlwlbbR1tGAW' }),
+    serviceUrl: 'https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/2b4b0051-9587-41a1-9e33-8796bd915016'
+  });
+  
+  const params = {
+    text: req.body.listenComment,
+    voice: 'pt-BR_IsabelaVoice',
+    accept: 'audio/wav'
+  };
+ 
+  textToSpeech
+    .synthesize(params)
+    .then(response => {
+      const audio = response.result;
+      return textToSpeech.repairWavHeaderStream(audio);
+    })
+    .then(repairedFile => {
+      fs.writeFileSync('audio/audio.wav', repairedFile);
+      const path = require('path');
+      const filePath = path.join(__dirname, 'audio/audio.wav');
+      sound.play(filePath);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  
+  
+
 });
 
