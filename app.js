@@ -9,8 +9,8 @@ const sound = require('sound-play');
 //Mysql Connect
 const sql=mysql.createConnection({
     host: 'localhost',
-    user: 'luiz',
-    password: '9922',
+    user: 'nodedb',
+    password: 'passnodedb',
     port: '3306'
 });
 sql.query("use nodejs");
