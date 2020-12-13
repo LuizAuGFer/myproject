@@ -47,8 +47,8 @@ app.post('/speat', urlencodeParser, function(req, results, res){
   const { IamAuthenticator } = require('ibm-watson/auth');
   
   const textToSpeech = new TextToSpeechV1({
-    authenticator: new IamAuthenticator({ apikey: 'LahBBLtvB3kh6IlBz6mWkgoU4QAvv80-OlwlbbR1tGAW' }),
-    serviceUrl: 'https://api.us-south.text-to-speech.watson.cloud.ibm.com/instances/2b4b0051-9587-41a1-9e33-8796bd915016'
+    authenticator: new IamAuthenticator({ apikey: '' }),
+    serviceUrl: ''
   });
   
   const params = {
